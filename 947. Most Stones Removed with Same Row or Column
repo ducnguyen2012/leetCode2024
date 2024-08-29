@@ -1,0 +1,30 @@
+// problem link: https://leetcode.com/problems/most-stones-removed-with-same-row-or-column/description/?envType=daily-question&envId=2024-08-29
+// minhf van khong hieu cai mindset cua van de nay cho lam
+class Solution {
+public:
+    void dfs(vector<int>& s1, set<vector<int>>& visited, vector<vector<int>>& stones) {
+        visited.insert(s1);
+        for (vector<int> i : stones) {
+            auto findVisit = visited.find(i);
+            if (findVisit == visited.end()) {
+                if (i[0] == s1[0] || i[1] == s1[1]) {
+                    dfs(i, visited, stones);
+                }
+            }
+        }
+    }
+    int removeStones(vector<vector<int>>& stones) {
+        int numberIsland = 0;
+        set<vector<int>> visited;
+        for (vector<int> i : stones) {
+            auto findVisit = visited.find(i);
+            if (findVisit == visited.end()) {
+                dfs(i, visited, stones);
+                numberIsland += 1;
+            }
+            
+        }
+        return stones.size() - numberIsland;
+    }
+    
+};
