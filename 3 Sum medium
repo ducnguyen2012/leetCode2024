@@ -1,0 +1,38 @@
+https://leetcode.com/problems/3sum/
+
+class Solution {
+public:
+    vector<vector<int>> threeSum(vector<int>& nums) {
+        vector<vector<int>> res;
+        vector<int>t1{0,0,0};
+        vector<int>t2{0,0,0,0};
+        // map<vector<int>, int> mp;
+        set<vector<int>> s;
+        sort(nums.begin(),nums.end());
+        if (nums == t1 || nums == t2) {
+            res.push_back(t1);
+            return res;
+        }
+        for (int k = 0; k < nums.size(); ++k) {
+            int i = k+1;
+            int j = nums.size()-1;
+            
+            int target = -nums[k];
+            while (i < j) {
+                if (nums[i] + nums[j] == target) {
+                    s.insert({nums[k],nums[i],nums[j]});
+                    i += 1;
+                    j -= 1;
+                } else if (nums[i] + nums[j] < target) {
+                    i += 1;
+                } else if (nums[i] + nums[j] > target) {
+                    j -= 1;
+                } 
+            }
+        }
+        for (auto i : s) {
+            res.push_back(i);
+        }
+        return res;
+    }
+};
