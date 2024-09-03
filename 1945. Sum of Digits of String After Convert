@@ -1,0 +1,22 @@
+https://leetcode.com/problems/sum-of-digits-of-string-after-convert/description/?envType=daily-question&envId=2024-09-03
+
+#define ll long long
+class Solution {
+public:
+    int getLucky(string s, int k) {
+        string res = "";    
+        for (char x : s) {
+            res += to_string(x - 'a' + 1);
+        }
+
+        for (int i = 0 ; i < k; ++i) {
+            int num2 = 0;
+            for (char x : res) {
+                num2 += x - '0';
+                cout<<num2<<"\n";
+            }
+            res = to_string(num2);
+        }
+        return stoi(res);
+    }
+};
