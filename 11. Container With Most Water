@@ -1,0 +1,27 @@
+class Solution {
+public:
+    int maxArea(vector<int>& height) {
+        // find maximum area of rectangle!
+        int width = 0; // min of height
+        int h = 0; // from this to that
+        int i = 0, j = height.size()-1;
+        int area = 0;
+        while(i < j) {
+            width = min(height[i], height[j]);
+            h = j-i;
+
+            area = max(area,h*width);
+            if (height[i] < height[j]) {
+                i += 1;
+            }
+            else if (height[i] > height[j]) {
+                j -= 1;
+            } 
+            else if (height[i] == height[j]) {
+                i += 1;
+                j -= 1;
+            }
+        }
+        return area;
+    }
+};
