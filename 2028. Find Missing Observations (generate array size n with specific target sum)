@@ -1,0 +1,41 @@
+https://leetcode.com/problems/find-missing-observations/?envType=daily-question&envId=2024-09-05
+
+class Solution {
+public:
+    vector<int> generateArray(int& n, int& sum) {
+        
+        vector<int> res(n, 1);
+        int currSum = accumulate(res.begin(), res.end(), 0);
+        if (currSum*6 < sum || currSum > sum) { // qua lon hoac qua nho
+            vector<int> temp;
+            return temp;
+        }
+
+        int diff = sum - currSum;
+        
+        int i = 0;
+        while (diff > 0) {
+            int increase = min(5, diff);
+            res[i] += increase;
+            diff -= increase;
+            i += 1;
+            if (i == n) {
+                i = 0;
+            }
+            
+        }
+        return res;
+    }
+    vector<int> missingRolls(vector<int>& rolls, int mean, int n) {
+        int m = rolls.size();
+        int sum = mean*(m+n);
+        int sum_m = accumulate(rolls.begin(), rolls.end(), 0);
+        int sum_n = sum - sum_m;
+        // find n number from 1 - 6 such that sum = sum_n!
+        vector<int> res;
+        
+        res = generateArray(n, sum_n);
+        
+        return res;
+    }
+};
