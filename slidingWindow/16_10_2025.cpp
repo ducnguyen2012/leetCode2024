@@ -67,6 +67,24 @@ void bai3(){
         
     }
 }
+void bai4(){
+    vector<int>arr{1,2,3,4,5};
+    int n = arr.size();
+    int sum = 11;
+    int i = 0; int j = 0;
+    int curSum = 0;
+    int maxSum = INT_MIN;
+    while(j < n){
+        curSum += arr[j];
+        while(curSum > sum){
+            curSum -= arr[i];
+            i += 1;
+        }
+        maxSum = max(maxSum,curSum);
+        j += 1;
+    }
+    cout<<"maxSUm: "<<maxSum<<"\n";
+}
 
 
 
