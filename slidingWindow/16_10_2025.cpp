@@ -85,6 +85,45 @@ void bai4(){
     }
     cout<<"maxSUm: "<<maxSum<<"\n";
 }
+void bai5(){
+    /*
+    Given a string s having lowercase characters, find the length of the longest substring without repeating characters. 
+
+Examples:
+
+    Input: s = "geeksforgeeks"
+    Output: 7 
+    Explanation: The longest substrings without repeating characters are "eksforg” and "ksforge", with lengths of 7.
+
+    Input: s = "aaa"
+    Output: 1
+    Explanation: The longest substring without repeating characters is "a"
+
+    Input: s = "abcdefabcbb"
+    Output: 6
+    Explanation: The longest substring without repeating characters is "abcdef".
+    */
+    string s = "geeksforgeeks";
+    int i  =0; int j = 0;
+    int n = s.size();
+    string res;
+    vector<int> vis(26,0);
+    int lenRes = INT_MIN;
+    while(j < n){
+        res += s[j];
+        vis[s[j]-'a'] += 1;
+        while (vis[s[j]-'a'] > 1) {
+            
+            vis[s[i]-'a'] -= 1;
+            i+=1;
+        }
+        
+        
+        lenRes = max(lenRes,j-i+1);
+        j += 1;
+    }
+    cout<<"longest substring without repeat char: "<<lenRes<<"\n";
+}
 
 
 
