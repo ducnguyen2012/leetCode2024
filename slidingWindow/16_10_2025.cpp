@@ -1,50 +1,71 @@
-void bai2(){
-    /*
-    Given a string S of size N consisting of the characters 
-    0, 1 and 2, the task is to find 
-    the length of the smallest substring of string S that 
-    contains all the three characters 0, 1 and 2. 
-    If no such substring exists, then return -1.
+#include <bits/stdc++.h>
 
-    Examples:
+using namespace std;
+
+void bai1(){
+    vector<int> arr{2,3};
+    int k = 1;
     
-    Input: S = "01212"
-    Output: 3
-    Explanation: The substring 012 
-    is the smallest substring that contains the characters 0, 1 and 2.
     
-    Input:  S = "12121"
-    Output: -1
-    Explanation:  As the character 0 
-    is not present in the string S, 
-    therefore no substring containing 
-    all the three characters 0, 1 and 2 exists. 
-    Hence, the answer is -1 in this case.
-    */
+    int n = arr.size();
+    int maxSum = INT_MIN;
+    int curSum = 0;
+    for(int i  =0; i < k; ++i){
+        curSum += arr[i];
+    }
+    for(int i = k; i < n; ++i){
+        curSum += arr[i] - arr[i-k];
+        maxSum = max(maxSum,curSum);
+    }
+    cout<<"maxSum: "<<maxSum<<"\n";
+}
+void bai2(){
     string S = "12121";
-    int n = S.size();
+    
     int freq[3] = {0};
-    int cnt = 0; // dem du co 0 1 2 khong
+    int cnt = 0;
+    int i = 0; int j = 0;
     int res = INT_MAX;
-    int i = 0, j = 0;
+    int n = S.size();
     while(j < n){
         freq[S[j]-'0'] += 1;
         if (freq[S[j]-'0'] == 1) cnt += 1;
         if (cnt == 3){
-            while(i < j && freq[S[i]-'0'] > 1) {
+            while(freq[S[i]-'0'] > 1) {
                 freq[S[i]-'0'] -= 1;
                 i += 1;
             }
-            
             res = min(res,j-i+1);
-            // de co the tiep tuc move window
             freq[S[i]-'0'] -= 1;
             i += 1;
             cnt -= 1;
         }
         j += 1;
     }
-    cout<<"Smallest window is: "<<res<<"\n";
+    cout<<"min substring: "<<res<<"\n";
+        
+    
+}
+void bai3(){
+    string txt = "geeks";
+    string pat = "eke";
+    
+    vector<int> freq(26,0);
+    for(int i = 0; i < pat.size(); ++i){
+        freq[txt[i]-'a'] += 1;
+        freq[pat[i]-'a'] -= 1;
+    }
+    // checking if we found the substring is permutation
+    // for(int i =0; i < 26; ++i){
+    //     if (freq[i] != 0) {
+    //         cout<<""
+    //     }
+    // }
+    for(int i = pat.size(); i < txt.size(); ++i){
+        freq[txt[i]-'a'] += 1;
+        freq[txt[i-pat.size()]-'a'] -= 1;
+        
+    }
 }
 
 
